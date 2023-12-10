@@ -8,7 +8,24 @@
  */
 void exec_cmd(char **tokens)
 {
-	pid_t pid = fork();
+	char *full_path;
+	pid_t pid;
+
+	if (tokens == NULL || tokens[0] == NULL)
+		return;
+
+	full_path = _is_cmd_exist(tokens[0]);
+	if (full_path == NULL)
+	{
+		_print("Command not found\n");
+		free(full_path);
+		return;
+	}
+
+	free(tokens[0]);
+	tokens[0] = full_path;
+
+	pid = fork();
 
 	if (pid == -1)
 	{

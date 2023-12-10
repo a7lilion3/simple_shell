@@ -8,17 +8,18 @@
 int main(void)
 {
 	char **tokens;
-	char *prompt;
+	char *line;
 
-	if (isatty(0))
-		prompt = "($) ";
-	else
-		prompt = "$ ";
-		
-	while ((tokens = get_line_tokens(prompt, " \n")))
+	while ((line = _getline("% ")))
 	{
-		print_path();
-
+		if (line[0] == '\n')
+		{
+			free(line);
+			continue;
+		}
+		tokens = _split(line, " \n");
+		exec_cmd(tokens);
+		free(line);
 		free_token_array(tokens);
 	}
 

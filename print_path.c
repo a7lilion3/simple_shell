@@ -5,7 +5,7 @@
  *
  * Return: void
  */
-void print_path()
+void print_path(void)
 {
 	char **tokens;
 	char *path;
@@ -13,7 +13,7 @@ void print_path()
 	path = _getenv("PATH");
 
 	tokens = _split(path, ":\n");
-	
+
 	print_tokens(tokens);
 
 	free_token_array(tokens);

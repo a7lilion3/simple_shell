@@ -8,28 +8,23 @@
  */
 char *_getline(const char *prompt)
 {
-	char *buffer;
-	int i;
-	char c;
-	ssize_t nbytes;
+	char *buffer, c;
+	int i = 0, nbytes;
 
 	buffer = malloc(MAX_INPUT_SIZE);
 	if (!buffer)
 		return (NULL);
-
 	_print(prompt);
-
-	i = 0;
 	while (1)
 	{
+		fflush(stdin);
+		fflush(stdout);
 		nbytes = read(STDIN_FILENO, &c, 1);
-
 		if (nbytes == -1)
 		{
 			free(buffer);
 			return (NULL);
 		}
-
 		if (nbytes == 0 || c == '\n')
 		{
 			buffer[i] = '\0';
@@ -46,13 +41,11 @@ char *_getline(const char *prompt)
 			}
 		}
 	}
-
 	if (i == 0 && nbytes == 0)
 	{
 		_print("\n");
 		free(buffer);
 		return (NULL);
 	}
-
 	return (buffer);
 }
