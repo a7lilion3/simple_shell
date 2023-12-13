@@ -1,27 +1,34 @@
-#include "shell.h"
+#include "main.h"
 
 /**
  * main - entry point
  *
- * Return: 0 if it's correct.
+ * Return: always 0.
  */
 int main(void)
 {
-	char *command = NULL;
-	int result;
+	char **tokens;
+	char *line, *pr;
 
-	while (1)
+	if (isatty(STDIN_FILENO))
+		pr = "($) ";
+	else
+		pr = "";
+
+	while ((line = _getline(pr)))
 	{
-		displayPrompt();
-		result = readCommand(&command);
-
-		if (result == 0)
-			break;
-
-		if (strLength(command) > 0)
-			executeCommand(command);
+		if (_strcmp(line, "") == 0)
+		{
+			free(line);
+			continue;
+		}
+		tokens = _split(line, " \n");
+		if (_strcmp("exit", tokens[0]) == 0)
+			return (0);
+		exec_cmd(tokens);
+		free(line);
+		free_token_array(tokens);
 	}
 
-	free(command);
 	return (0);
 }
