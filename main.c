@@ -8,9 +8,14 @@
 int main(void)
 {
 	char **tokens;
-	char *line;
+	char *line, *prompt;
 
-	while ((line = _getline("% ")))
+	if (isatty(STDIN_FILENO))
+		prompt = "($) ";
+	else
+		prompt = "$";
+
+	while ((line = _getline(prompt)))
 	{
 		if (line[0] == '\n')
 		{
@@ -18,6 +23,8 @@ int main(void)
 			continue;
 		}
 		tokens = _split(line, " \n");
+		if (_strcmp("exit", tokens[0]) == 0)
+			return (0);
 		exec_cmd(tokens);
 		free(line);
 		free_token_array(tokens);

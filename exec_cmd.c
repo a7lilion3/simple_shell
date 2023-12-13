@@ -13,20 +13,22 @@ void exec_cmd(char **tokens)
 
 	if (tokens == NULL || tokens[0] == NULL)
 		return;
-
-	full_path = _is_cmd_exist(tokens[0]);
-	if (full_path == NULL)
+	if (tokens[0][0] == '/')
+		full_path = tokens[0];
+	else
+		full_path = _is_cmd_exist(tokens[0]);
+	if (full_path == NULL && tokens[0][0] != '/')
 	{
 		_print("Command not found\n");
 		free(full_path);
 		return;
 	}
-
-	free(tokens[0]);
-	tokens[0] = full_path;
-
+	if (tokens[0][0] != '/')
+	{
+		free(tokens[0]);
+		tokens[0] = full_path;
+	}
 	pid = fork();
-
 	if (pid == -1)
 	{
 		perror(tokens[0]);
