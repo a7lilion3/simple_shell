@@ -5,7 +5,7 @@
  *
  * Return: 0 if it's correct.
  */
-int main()
+int main(void)
 {
 	char *command = NULL;
 	int result;

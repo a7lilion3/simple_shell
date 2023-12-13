@@ -32,8 +32,7 @@ void executeCommand(const char *command)
 	}
 	else
 	{
-		do
-		{
+		do {
 			waitpid(pid, &status, 0);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
