@@ -8,14 +8,14 @@
 int main(void)
 {
 	char **tokens;
-	char *line, *prompt;
+	char *line, *pr;
 
 	if (isatty(STDIN_FILENO))
-		prompt = "# ";
+		pr = "($) ";
 	else
-		prompt = "#";
+		pr = "";
 
-	while ((line = _getline(prompt)))
+	while ((line = _getline(pr)))
 	{
 		if (line[0] == '\n')
 		{
