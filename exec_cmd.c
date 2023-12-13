@@ -17,7 +17,7 @@ void exec_cmd(char **tokens)
 		full_path = tokens[0];
 	else
 		full_path = _is_cmd_exist(tokens[0]);
-	if (full_path == NULL && tokens[0][0] != '/')
+	if (_is_cmd_exist(tokens[0]) == NULL && tokens[0][0] != '/')
 	{
 		_print("Command not found\n");
 		free(full_path);
