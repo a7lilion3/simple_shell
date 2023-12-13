@@ -17,7 +17,7 @@ int main(void)
 
 	while ((line = _getline(pr)))
 	{
-		if (line[0] == '\n')
+		if (_strcmp(line, "") == 0)
 		{
 			free(line);
 			continue;
