@@ -11,9 +11,9 @@ int main(void)
 	char *line, *prompt;
 
 	if (isatty(STDIN_FILENO))
-		prompt = "($) ";
+		prompt = "# ";
 	else
-		prompt = "$";
+		prompt = "#";
 
 	while ((line = _getline(prompt)))
 	{

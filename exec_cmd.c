@@ -37,7 +37,7 @@ void exec_cmd(char **tokens)
 	}
 	else if (pid == 0)
 	{
-		if (execve(tokens[0], tokens, NULL) == -1)
+		if (execve(tokens[0], tokens, environ) == -1)
 		{
 			perror(tokens[0]);
 			free_token_array(tokens);
