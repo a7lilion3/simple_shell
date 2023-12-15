@@ -19,7 +19,7 @@ path_t *_build_path_list(void)
 	head = NULL;
 	current = NULL;
 
-	token = _strtok(path, ":");
+	token = _strtok(path, ":\n");
 	while (token != NULL)
 	{
 		new = malloc(sizeof(path_t));
@@ -40,7 +40,7 @@ path_t *_build_path_list(void)
 			}
 		}
 
-		token = _strtok(NULL, ":");
+		token = _strtok(NULL, ":\n");
 	}
 
 	free(path);

@@ -28,6 +28,9 @@ int main(void)
 		exec_cmd(tokens);
 		free(line);
 		free_token_array(tokens);
+
+		if (!isatty(STDIN_FILENO))
+			return (0);
 	}
 
 	return (0);
