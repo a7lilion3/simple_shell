@@ -29,7 +29,12 @@ int main(void)
 			free_token_array(tokens);
 			return (2);
 		}
-		exec_cmd(tokens);
+		if (exec_cmd(tokens) != 0 && !isatty(STDIN_FILENO))
+		{
+			free(line);
+			free_token_array(tokens);
+			return (2);
+		}
 		free(line);
 		free_token_array(tokens);
 

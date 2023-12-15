@@ -6,13 +6,13 @@
  *
  * Return: void
  */
-void exec_cmd(char **tokens)
+int exec_cmd(char **tokens)
 {
 	char *full_path;
 	pid_t pid;
 
 	if (tokens == NULL || tokens[0] == NULL)
-		return;
+		return (2);
 	if (tokens[0][0] == '/')
 		full_path = tokens[0];
 	else
@@ -21,7 +21,7 @@ void exec_cmd(char **tokens)
 	{
 		_print("Command not found\n");
 		free(full_path);
-		return;
+		return (2);
 	}
 	if (tokens[0][0] != '/')
 	{
@@ -41,9 +41,10 @@ void exec_cmd(char **tokens)
 		{
 			perror(tokens[0]);
 			free_token_array(tokens);
-			_exit(EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		}
 	}
 	else
 		wait(NULL);
+	return (0);
 }

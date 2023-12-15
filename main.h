@@ -46,6 +46,6 @@ path_t	*_build_path_list(void);
 void	_print_path_list(path_t *head);
 void	_free_path_list(path_t *head);
 char	*_is_cmd_exist(char *cmd);
-void	exec_cmd(char **tokens);
+int		exec_cmd(char **tokens);
 
 #endif
