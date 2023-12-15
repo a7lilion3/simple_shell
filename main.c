@@ -24,7 +24,11 @@ int main(void)
 		}
 		tokens = _split(line, " \n");
 		if (_strcmp("exit", tokens[0]) == 0)
-			return (0);
+		{
+			free(line);
+			free_token_array(tokens);
+			return (2);
+		}
 		exec_cmd(tokens);
 		free(line);
 		free_token_array(tokens);
